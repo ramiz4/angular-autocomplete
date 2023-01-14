@@ -1,0 +1,20 @@
+<input
+  type="text"
+  (input)="search($event)"
+  [value]="selectedValue"
+  [placeholder]="options.placeholder"
+/>
+<ng-container *ngIf="results$ | async as results">
+  <ul>
+    <li
+      *ngFor="let result of results[options.resultsProp]"
+      (click)="select(result)"
+    >
+      {{ result[options.viewProp] }}
+    </li>
+  </ul>
+  <p *ngIf="results[options.resultsProp].length === 0">
+    {{ options.noResultText }}
+  </p>
+</ng-container>
+<p *ngIf="loading">{{ options.loadingText }}</p>
